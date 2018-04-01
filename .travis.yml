@@ -17,9 +17,7 @@ script:
     # Turn off XDebug to make the rest faster
     - phpenv config-rm xdebug.ini || return 0
     - dir
-
-    # Global install checks
-    - temp/apigen-project/bin/apigen generate -h
+    
     # disable for now, due to commit lock on opened PR
     # https://github.com/ApiGen/ApiGen/commit/891bdf8c8090ee72028943bb9d06d1accda27daf
     # https://github.com/Roave/BetterReflection/pull/312
