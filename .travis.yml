@@ -9,4 +9,4 @@ script:
     - phpenv config-rm xdebug.ini || return 0
     - cd ../../
     - composer require apigen/apigen
-    - sh ./vsp-libs/apigen-boilerplate/build.sh
+    - bash vsp-libs/apigen-boilerplate/build.sh
