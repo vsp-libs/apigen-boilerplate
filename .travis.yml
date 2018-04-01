@@ -28,8 +28,9 @@ after_script:
     # Generate ApiGen's api a push it to https://github.com/apigen/apigen, gh-pages branch
     - |
         if [[ $TRAVIS_BRANCH == "master" ]]; then
+          dir
           # Generate API for ApiGen
-          bin/apigen generate ./ --destination temp/api
+          bin/apigen generate ../../vsp-libs/apigen-boilerplate --destination temp/api
           # use this, when ApiGen is faster
           # bin/apigen generate src packages/*/src --destination temp/api
           cd temp/api
