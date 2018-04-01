@@ -7,11 +7,7 @@ php: 7.1
 
 install:
     # install composer dependencies
-    - composer require apigen/apigen --dev ../../apigen/
-    - cd ../../
-    - dir
-    - cd apigen
-    - dir
+    - composer require apigen/apigen --dev 
     # Create composer global installs
     - composer create-project apigen/apigen:dev-master temp/apigen-project
     # - composer global require apigen/apigen:dev-master
