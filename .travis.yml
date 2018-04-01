@@ -4,30 +4,35 @@ sudo: false
 
 php: 7.1
 
-env:
-    global:
-        # Token for generate-api.sh, so Travis is able to push to "apigen/Api repository
-        # It must be encrypted in https://github.com/ApiGen/api local repository
-        # See manual how to set it up: https://github.com/TomasVotruba/tomasvotruba.cz/blob/08f0df06674c6bc9db224a69250b8e95060cdc96/.travis.yml#L6-L15
 
 install:
-    - composer require apigen/apigen
+    # install composer dependencies
+    - composer install
+    # Create composer global installs
+    - composer create-project apigen/apigen:dev-master temp/apigen-project
+    - composer global require apigen/apigen:dev-master
 
 script:
+    # Turn off XDebug to make the rest faster
     - phpenv config-rm xdebug.ini || return 0
-    
+
+    # Global install checks
+    - temp/apigen-project/bin/apigen generate -h
+    # disable for now, due to commit lock on opened PR
+    # https://github.com/ApiGen/ApiGen/commit/891bdf8c8090ee72028943bb9d06d1accda27daf
+    # https://github.com/Roave/BetterReflection/pull/312
+    # - ~/.composer/vendor/bin/apigen generate -h
+
 after_script:
+   
     # Generate ApiGen's api a push it to https://github.com/apigen/apigen, gh-pages branch
-    - mkdir ../../docs/
     - |
         if [[ $TRAVIS_BRANCH == "master" ]]; then
-          cd ../../
-          mkdir docs/
           # Generate API for ApiGen
-          bin/apigen generate ./vsp-libs/apigen-boilerplate/ --destination ./docs/
+          bin/apigen generate ./ --destination temp/api
           # use this, when ApiGen is faster
           # bin/apigen generate src packages/*/src --destination temp/api
-          cd ./docs/
+          cd temp/api
 
           # Add this repository as remote
           git init
@@ -40,6 +45,11 @@ after_script:
           # Add generated API
           git add .
           git commit -m "API Regenerated"
+
           # Push current content to gh-pages branch
           git push origin master:gh-pages -f
         fi
+
+# do not send emails
+notifications:
+    email: never
