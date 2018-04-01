@@ -11,6 +11,12 @@ script:
     - composer require apigen/apigen
     - dir
     - mkdir repo_docs
+    - cd repo_docs
+    - git clone https://github.com/johnbillion/extended-cpts.git
+    - git checkout -f gh-pages
+    - dir
+    - ls -l
     - ./vendor/bin/apigen generate -s ./vsp-libs/apigen-boilerplate --destination ./docs
     - cd docs
     - dir
+    - ls -l
