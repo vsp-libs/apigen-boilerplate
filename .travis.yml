@@ -7,6 +7,7 @@ php: 7.1
 
 install:
     # install composer dependencies
+    - cd ../../
     - composer require apigen/apigen --dev 
     # Create composer global installs
     - composer create-project apigen/apigen:dev-master temp/apigen-project
@@ -31,7 +32,7 @@ after_script:
         if [[ $TRAVIS_BRANCH == "master" ]]; then
           dir
           # Generate API for ApiGen
-          vendor/bin/apigen generate ../../vsp-libs/apigen-boilerplate --destination temp/api
+          ../../vendor/bin/apigen generate ./ --destination temp/api
           # use this, when ApiGen is faster
           # bin/apigen generate src packages/*/src --destination temp/api
           cd temp/api
