@@ -5,16 +5,13 @@ sudo: false
 php: 7.1
 
 
-install:
-    # install composer dependencies
-    - cd ../../
-    - composer require apigen/apigen --dev 
-    # Create composer global installs
-    # - composer global require apigen/apigen:dev-master
-
 script:
     # Turn off XDebug to make the rest faster
     - phpenv config-rm xdebug.ini || return 0
+    - cd ../../
+    - dir
+    - composer require apigen/apigen --dev 
+    - cd ./vsp-libs/apigen-boilerplate/
     - dir
     
     # disable for now, due to commit lock on opened PR
