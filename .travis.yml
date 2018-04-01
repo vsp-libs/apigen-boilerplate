@@ -13,5 +13,6 @@ script:
     - git clone --branch=gh-pages https://github.com/vsp-libs/apigen-boilerplate.git ./repo_docs
     - composer require apigen/apigen
     - ./vendor/bin/apigen generate -s ./vsp-libs/apigen-boilerplate --destination ./repo_docs
+    - yes
     - cd repo_docs
     - ls -l
