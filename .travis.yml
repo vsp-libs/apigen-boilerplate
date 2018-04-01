@@ -10,7 +10,7 @@ install:
     - composer require apigen/apigen --dev
     # Create composer global installs
     - composer create-project apigen/apigen:dev-master temp/apigen-project
-    - composer global require apigen/apigen:dev-master
+    # - composer global require apigen/apigen:dev-master
 
 script:
     # Turn off XDebug to make the rest faster
