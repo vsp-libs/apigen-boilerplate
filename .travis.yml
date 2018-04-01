@@ -10,3 +10,7 @@ script:
     - cd ../../
     - composer require apigen/apigen
     - dir
+    - mkdir repo_docs
+    - ./vendor/bin/apigen generate -s ./vsp-libs/apigen-boilerplate --destination ./docs
+    - cd docs
+    - dir
