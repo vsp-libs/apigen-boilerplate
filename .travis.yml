@@ -1,0 +1,12 @@
+# run on container environment
+sudo: false
+
+language: php
+
+php: 7.1
+    
+script:
+    - phpenv config-rm xdebug.ini || return 0
+    - cd ../../
+    - composer require apigen/apigen
+    - sh build.sh
