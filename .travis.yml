@@ -26,11 +26,13 @@ after_script:
         if [[ $TRAVIS_BRANCH == "master" ]]; then
           dir
           # Generate API for ApiGen
-          ../../vendor/bin/apigen generate ./ --destination temp/api
+          ../../vendor/bin/apigen generate ../apigen-boilerplate/ --destination temp/api
           # use this, when ApiGen is faster
           # bin/apigen generate src packages/*/src --destination temp/api
           cd temp/api
-
+          
+          dir
+          
           # Add this repository as remote
           git init
           git remote add origin https://${GH_TOKEN}@github.com/vsp-libs/apigen-boilerplate.git
