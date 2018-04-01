@@ -15,6 +15,7 @@ install:
 script:
     # Turn off XDebug to make the rest faster
     - phpenv config-rm xdebug.ini || return 0
+    - dir
 
     # Global install checks
     - temp/apigen-project/bin/apigen generate -h
