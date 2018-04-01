@@ -6,15 +6,13 @@
  * Date: 01-04-2018
  * Time: 07:22 AM
  *
+ * @version   2.0
  * @author    Varun Sridharan <varunsridharan23@gmail.com>
  * @since     1.0
  * @package   vsp-framework
  * @copyright GPL V3 Or greater
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
 
 if ( ! class_exists( 'VSP_WP_Post' ) ) {
 	/**
@@ -26,7 +24,7 @@ if ( ! class_exists( 'VSP_WP_Post' ) ) {
 		 *
 		 * @var string
 		 */
-		public $version = '1.0';
+		public $version = '2.0';
 
 		/**
 		 * Post id
