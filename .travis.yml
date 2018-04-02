@@ -1,59 +1,26 @@
 language: php
-
 sudo: false
-
 php: 7.1
-
-
 script:
-    # Turn off XDebug to make the rest faster
     - phpenv config-rm xdebug.ini || return 0
-    #- cd ../../
-    #- dir
-    #- composer require apigen/apigen --dev 
-    #- cd ./vsp-libs/apigen-boilerplate/
-    #- mkdir ./docs/
-    #- dir
-    
-    # disable for now, due to commit lock on opened PR
-    # https://github.com/ApiGen/ApiGen/commit/891bdf8c8090ee72028943bb9d06d1accda27daf
-    # https://github.com/Roave/BetterReflection/pull/312
-    # - ~/.composer/vendor/bin/apigen generate -h
 
 after_script:
-   
-    # Generate ApiGen's api a push it to https://github.com/apigen/apigen, gh-pages branch
     - |
         if [[ $TRAVIS_BRANCH == "master" ]]; then
           cd ../../
           composer require apigen/apigen --dev
           cd $TRAVIS_REPO_SLUG
           mkdir ./docs/
-          dir
-          # Generate API for ApiGen
-          ../../vendor/bin/apigen generate -s ../apigen-boilerplate/ --destination ../apigen-boilerplate/docs/ --template-theme bootstrap
-          # use this, when ApiGen is faster
-          # bin/apigen generate src packages/*/src --destination temp/api
-          cd ../apigen-boilerplate/docs/
-          
-          dir
-          
-          # Add this repository as remote
+          ../../vendor/bin/apigen generate -s ../../$TRAVIS_REPO_SLUG/ --destination ../../$TRAVIS_REPO_SLUG/docs/
+          cd ../../$TRAVIS_REPO_SLUG/docs/
           git init
-          git remote add origin https://${GH_TOKEN}@github.com/vsp-libs/apigen-boilerplate.git
-
-          # Set Travis to Git Identity
+          git remote add origin https://${GH_TOKEN}@github.com/$TRAVIS_REPO_SLUG.git
           git config --global user.email "travis@travis-ci.org"
           git config --global user.name "Travis"
-
-          # Add generated API
           git add .
           git commit -m "API Regenerated"
-
-          # Push current content to gh-pages branch
           git push origin master:gh-pages -f
         fi
-
-# do not send emails
+        
 notifications:
     email: never
