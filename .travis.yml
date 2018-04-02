@@ -31,7 +31,7 @@ after_script:
           mkdir ./docs/
           dir
           # Generate API for ApiGen
-          ../../vendor/bin/apigen generate -s ../apigen-boilerplate/ --destination ../apigen-boilerplate/docs/ --template-theme icanboogie
+          ../../vendor/bin/apigen generate -s ../apigen-boilerplate/ --destination ../apigen-boilerplate/docs/ --template-theme bootstrap
           # use this, when ApiGen is faster
           # bin/apigen generate src packages/*/src --destination temp/api
           cd ../apigen-boilerplate/docs/
